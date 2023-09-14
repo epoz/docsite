@@ -30,7 +30,7 @@ if not ROOT_PATH:
 logging.debug("Extracting zipfile")
 
 found_root = 0
-with zipfile.ZipFile("x.zip", "r") as zf:
+with zipfile.ZipFile(ZIP_LOCATION, "r") as zf:
     root_folder = zf.namelist()[0].split("/")[0]
     if root_folder == ROOT_PATH:
         for file in zf.namelist():
