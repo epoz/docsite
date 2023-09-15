@@ -100,3 +100,15 @@ for dirpath, dirnames, filenames in os.walk(ROOT_PATH):
             out = template.render({"content": Markup(html)})
 
             open(outpath.replace(".docx", ".html"), "w").write(out)
+
+
+path, _ = os.path.split(ZIP_LOCATION)
+outzip = os.path.join(path, "_.zip")
+zip_file = zipfile.ZipFile(outzip, "w", zipfile.ZIP_DEFLATED)
+
+for root, dirs, files in os.walk(OUT_PATH):
+    for file in files:
+        file_path = os.path.join(root, file)
+        zip_file.write(file_path, os.path.relpath(file_path, OUT_PATH))
+
+zip_file.close()
